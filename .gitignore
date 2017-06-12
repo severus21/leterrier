@@ -1,20 +1,22 @@
-*.annot
-*.cmo
-*.cma
-*.cmi
-*.a
-*.o
-*.cmx
-*.cmxs
-*.cmxa
-
-# ocamlbuild working directory
+# Build and doc directories
+debug/
+release/
 _build/
 
-# ocamlbuild targets
-*.byte
-*.native
+# Binaries
+*.debug
+*.release
 
-# oasis generated files
-setup.data
-setup.log
+*~
+
+# Compilation byproducts
+*.cmi
+*.cmo
+*.cmx
+*.cmxs
+*.o
+*.a
+.depend
+
+# Vim
+**.swp
