@@ -20,3 +20,6 @@ _build/
 
 # Vim
 **.swp
+
+#DB
+**.db
