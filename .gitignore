@@ -23,3 +23,6 @@ _build/
 
 #DB
 **.db
+
+#Wiki
+wiki/
