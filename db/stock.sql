@@ -69,17 +69,17 @@ CREATE TABLE shops(
         - brand : correspond à l'id de la marque de cette exemplaire (cf. brands)
         - amount : correspond à la quantité présente dans le stock pour cette exemplaire, la syntaxe est la suivante
             * pour une description en terme de masse :
-                [0-9]+(\.[0-9]+)? [mg|g|Kg]
+                [0-9]+(\.[0-9]+)?( )?[mg|g|Kg]
                 ex: 
                     500 mg
-                    9.1 Kg
+                    9.1Kg
             * pour une description en terme de volume : 
-                [0-9]+(\.[0-9]+)? [ml|L]
+                [0-9]+(\.[0-9]+)?( )?[ml|L]
                 ex:
                     1.1 L
-                    150 ml
+                    150ml
             * pour une description en nombre de pièces :
-                [0-9]+ p
+                [0-9]+( )?p
                 ex:
                     3 p
         - price : le prix d'achat en euros
@@ -88,6 +88,8 @@ CREATE TABLE shops(
         - expiration_delay : la durée de conservation une fois ouvert (notons que de même il s'exprime en nombre de secondes)
         - origin : correspond à l'id du pays d'origine de cet exemplaire (cf. countris)
         - shop : correspond à l'id du magazin d'où provient cet exemplaire
+        - insertion_date : date d'ajout dans la base
+        - deletion_date : date à partir de laquelle l'entry n'est plus moralement dans la base
         Remarquons que la PRIMARY KEY est "rowid" ici
 
         ex:
@@ -98,6 +100,8 @@ CREATE TABLE shops(
 */
 CREATE TABLE stock_entry(
     name VARCHAR(50) NOT NULL,
+    
+    /* entry metadata */
     brand INTEGER,
     amount VARCHAR(50),
     price REAL,
@@ -106,10 +110,19 @@ CREATE TABLE stock_entry(
     expiration_delay INTEGER,
     origin INTEGER, 
     shop INTEGER,
-    
+
+    /* system metadata */
+    insertion_date INTEGER,
+    deletion_date INTEGER,
+
+    /* user metadata */
+    place INTEGER, 
+
     FOREIGN KEY (brand) REFERENCES brands(rowid),
     FOREIGN KEY (origin) REFERENCES countries(rowid),
-    FOREIGN KEY (shop) REFERENCES shops(rowid)
+    FOREIGN KEY (shop) REFERENCES shops(rowid),
+    
+    FOREIGN KEY (place) REFERENCES places(rowid)
 );
 
 /**
