@@ -89,7 +89,7 @@ CREATE TABLE shops(
         - origin : correspond à l'id du pays d'origine de cet exemplaire (cf. countris)
         - shop : correspond à l'id du magazin d'où provient cet exemplaire
         - insertion_date : date d'ajout dans la base
-        - deletion_date : date à partir de laquelle l'entry n'est plus moralement dans la base
+        - deletion_date : date à partir de laquelle l'entry n'est plus moralement dans la base(si toujours dans la base prenons 0)
         Remarquons que la PRIMARY KEY est "rowid" ici
 
         ex:
@@ -102,21 +102,21 @@ CREATE TABLE stock_entry(
     name VARCHAR(50) NOT NULL,
     
     /* entry metadata */
-    brand INTEGER,
-    amount VARCHAR(50),
-    price REAL,
-    expiration_date INTEGER, 
-    current_expiration_date INTEGER,
-    expiration_delay INTEGER,
-    origin INTEGER, 
-    shop INTEGER,
+    brand INTEGER NOT NULL,
+    amount VARCHAR(50) NOT NULL,
+    price REAL NOT NULL,
+    expiration_date INTEGER NOT NULL, 
+    current_expiration_date INTEGER NOT NULL,
+    expiration_delay INTEGER NOT NULL,
+    origin INTEGER NOT NULL, 
+    shop INTEGER NOT NULL,
 
     /* system metadata */
-    insertion_date INTEGER,
-    deletion_date INTEGER,
+    insertion_date INTEGER NOT NULL,
+    deletion_date INTEGER NOT NULL,
 
     /* user metadata */
-    place INTEGER, 
+    place INTEGER NOT NULL, 
 
     FOREIGN KEY (brand) REFERENCES brands(rowid),
     FOREIGN KEY (origin) REFERENCES countries(rowid),
