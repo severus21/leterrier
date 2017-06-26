@@ -1,2 +1,11 @@
 <src> or <tests>: include
 <*.ml> : annot
+
+"src/models":include
+<src/models/*.cmx>: for-pack(Models)
+
+"src/managers":include
+<src/managers/*.cmx>: for-pack(Managers)
+
+"src/handlers":include
+<src/handlers/*.cmx>: for-pack(Handlers)

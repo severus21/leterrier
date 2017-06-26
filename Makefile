@@ -12,26 +12,37 @@ BUILD_DIR=debug/
 
 DOC_DIR=terrier.docdir
 
+DB = db/stock.db	
+DB_TEST = db/test1.db db/test2.db db/test3.db db/test4.db
+
+db/%.db: db/%.sql
+	sqlite3 $@ < $<	
+
 default: debug
 
-debug: dbreset
+debug: clean $(DB)  
 	@rm -f terrier.debug
 	$(BUILD) src/terrier.native
 	@ln -s $(BUILD_DIR)/src/terrier.native terrier.debug
 
-unittests: dbreset
-	@rm -f unitttests.debug
+debug_cli: clean $(DB) 
+	@rm -f terrier_cli.debug
+	$(BUILD) src/ihm/terrier_cli.native
+	@ln -s $(BUILD_DIR)/src/ihm/terrier_cli.native terrier_cli.debug
+
+unittests: clean $(DB) $(DB_TEST)
+	@rm -f unittests.debug
 	$(BUILD) tests/unittests.native
 	@ln -s $(BUILD_DIR)/tests/unittests.native unittests.debug
 	./unittests.debug -no-cache-filename -output-file unittests_logs.log
 
-integrationtests: dbreset
+integrationtests: clean $(DB)
 	@rm -f integrationtests.debug
 	$(BUILD) tests/integrationtests.native
 	@ln -s $(BUILD_DIR)/tests/integrationtests.native unittests.debug
 	./integrationtests.debug -no-cache-filename -output-file unittests_logs.log
 
-systemtests: dbreset
+systemtests: clean $(DB)
 	@rm -f systemtests.debug
 	$(BUILD) tests/systemtests.native
 	@ln -s $(BUILD_DIR)/tests/systemtests.native unittests.debug
@@ -49,20 +60,16 @@ tests: unittests integrationtests
 doc: debug
 	ocamlbuild -use-ocamlfind -no-hygiene $(PACKAGES) $(DOC_DIR)/index.html
 
-dbreset:
-	@rm -rf db/core.db
-	sqlite3 db/core.db < db/core.sql
-
 clean:
 	@rm -rf debug/
 	@rm -rf release/
+	@rm -rf db/*.db
 	@ocamlbuild -clean
 
 mrproper: clean 
 	@rm -f *.debug *.release *.dvi *.tex *.log *.pdf *.aux oUnit*
-	@rm -f *.logs
+	@rm -f *.logs *.log
 	@rm -rf db/core.db
 	@rm -rf doc/
-	@rm -rf db/*.db
 
 .PHONY: debug mrproper 
