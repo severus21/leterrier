@@ -210,6 +210,9 @@ let unittests () =
             Array.iter (fun x -> x#set_rowid None) _brands;
 
             Array.iter (fun brand -> brandManager#store brand) _brands;
+            Array.iter (fun brand -> assert_equal (brandManager#remove  
+                                               ~name:(Some (brand#name^"R")) 
+                                               ~id:brand#rowid ()) false) _brands;
             Array.iter (fun brand -> assert (brandManager#remove  
                                                ~name:(Some brand#name) 
                                                ~id:brand#rowid ())) _brands;
