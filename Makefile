@@ -25,11 +25,6 @@ debug: clean $(DB)
 	$(BUILD) src/terrier.native
 	@ln -s $(BUILD_DIR)/src/terrier.native terrier.debug
 
-debug_cli: clean $(DB) 
-	@rm -f terrier_cli.debug
-	$(BUILD) src/ihm/terrier_cli.native
-	@ln -s $(BUILD_DIR)/src/ihm/terrier_cli.native terrier_cli.debug
-
 unittests: clean $(DB) $(DB_TEST)
 	@rm -f unittests.debug
 	$(BUILD) tests/unittests.native
