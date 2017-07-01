@@ -62,7 +62,9 @@ class cBrandManager db = object(self)
         match brand#rowid with
         |None -> raise Not_a_row 
         |Some(rowid) ->(
-            (*We do nothing because the only colum (except "rowid") is "name" and it is the primary key*)
+            (*We do nothing because the only colum (except "rowid") 
+            is "name" and it is the primary key hence in this case the update do 
+            nothing*)
          )
 
     method store brand = 

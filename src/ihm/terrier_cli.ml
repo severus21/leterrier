@@ -1,10 +1,9 @@
 open Arg
 open Misc
 
-
 exception Found
 let rec command action =
-    let handlers = [Brand.handlers; Entry.handlers] in
+    let handlers = [Brand.handlers] in
     
 
     try    
@@ -18,6 +17,7 @@ let rec command action =
         action arguments
 *)
 let () =
+    let stdf = Format.std_formatter and errf = Format.err_formatter in
     annon_fun_ref := command; 
     parse_dynamic spec (fun x -> !annon_fun_ref x) "Coucou";
     callback ()

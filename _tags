@@ -9,3 +9,9 @@
 
 "src/handlers":include
 <src/handlers/*.cmx>: for-pack(Handlers)
+
+"src/ihm":include
+<src/ihm/*.cmx>: for-pack(Ihm)
+
+"src/plugins":include
+<src/plugins/*.cmx>: for-pack(Plugins)

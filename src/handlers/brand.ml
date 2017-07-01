@@ -6,16 +6,15 @@ class cBrandHandler db = object
 
     method add (name:string) =
         let _brand = new cBrand name () in
-        try 
-            _manager#store _brand;
-            _brand 
-        with
-        |e->(
-            (*output the correct error message, said to the engine if it is a critical error or not and log it*)
-            failwith "TODO"
-        )
+        _manager#store _brand;
+        _brand 
         
-              
+    method ls =
+        _manager#ls      
+
+    method remove ?(id=None) ?(name=None) ()=
+        _manager#remove ~name:name ~id:id ()
+
     method on_destroy =
         _manager#on_destroy
 
