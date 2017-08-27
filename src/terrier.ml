@@ -1,3 +1,8 @@
+(*This the leterrier launcher, for now it is designed in order to be used in a one shot command line manner
+    @author severus21
+    @version 0.0.0
+*)
+
 open Managers.Brand
 open Models.Brand
 open Engine

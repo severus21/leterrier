@@ -1,3 +1,6 @@
+(*  @author severus21
+    @version 0.0.0*) 
+
 open Sqlite3
 open OUnit2
 
@@ -94,7 +97,7 @@ class cBrandManager db = object(self)
 
         List.rev !_brands
     
-    (*WARNING it is a -f remove*)      
+    (*WARNING it is a -f remove, TODO do both kind of remove*)      
     method remove ?id:(id=None) ?name:(name=None) ()= 
     match id,name with
     |None, None -> false    

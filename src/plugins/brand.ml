@@ -1,3 +1,6 @@
+(** @author severus21
+    @version 0.0.0*)
+
 open Engine  
 open Ihm.Parser
 open Format

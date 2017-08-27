@@ -1,3 +1,6 @@
+(** @author severus21
+    @version 0.0.0*)
+
 open Model
 
 class cBrand  (name:string) ?rowid:(rowid=None) ()= object(self)

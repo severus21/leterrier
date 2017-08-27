@@ -1,3 +1,6 @@
+(** @author severus21
+    @version 0.0.0*) 
+
 class virtual cModel rowid =object(self)
     val mutable _rowid:int64 option = rowid
 

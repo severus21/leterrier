@@ -54,7 +54,6 @@ tests: unittests integrationtests
 
 doc: debug
 	ocamlbuild -use-ocamlfind -no-hygiene $(PACKAGES) $(DOC_DIR)/index.html
-
 clean:
 	@rm -rf debug/
 	@rm -rf release/
